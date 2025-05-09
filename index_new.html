@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Uma homenagem especial para o Dia das Mães">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Feliz Dia das Mães</title>    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=acoustic-guitar-loop-95-bpm-135531.mp3" as="audio" type="audio/mpeg">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffd1dc, #fff0f5);
+            font-family: 'Montserrat', sans-serif;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .container {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        .meaning-text {
+            font-family: 'Dancing Script', cursive;
+            color: #D84B89;
+            text-align: center;
+            padding: 30px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            z-index: 10;
+            max-width: 90%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            line-height: 1.8;
+            font-size: 2.2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .personal-message {
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            z-index: 10;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+        }
+
+        .mom-message, .wife-message {
+            color: #D84B89;
+            font-size: 4rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .final-message {
+            color: #D84B89;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .fun-message {
+            color: #FF1493;
+            font-size: 2rem;
+            margin-top: 20px;
+            animation: colorChange 3s infinite;
+        }
+
+        .falling-emoji {
+            position: absolute;
+            font-size: 2.5rem;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            filter: drop-shadow(0 0 5px rgba(255, 192, 203, 0.5));
+            animation: falling-rotate 4s linear forwards;
+        }
+
+        @keyframes falling-rotate {
+            0% { 
+                transform: translateY(-100vh) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: translateY(30vh) rotate(180deg) scale(1.2);
+                opacity: 0.8;
+            }
+            100% { 
+                transform: translateY(100vh) rotate(360deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes colorChange {
+            0%, 100% { color: #FF1493; }
+            50% { color: #D84B89; }
+        }
+
+        .heart {
+            display: inline-block;
+            color: #FF1493;
+            animation: heartbeat 1.5s infinite;
+            font-size: 150%;
+        }
+
+        .emoji {
+            display: inline-block;
+            font-size: 150%;
+            margin: 0 5px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        .audio-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .meaning-text { 
+                font-size: 1.5rem;
+                padding: 15px;
+                max-width: 85%;
+                line-height: 1.6;
+            }
+            .mom-message, .wife-message { 
+                font-size: 2.2rem;
+                padding: 15px; 
+            }
+            .final-message { 
+                font-size: 1.8rem;
+                padding: 15px; 
+            }
+            .fun-message { 
+                font-size: 1.4rem;
+                margin-top: 15px;
+            }
+            .personal-message {
+                width: 85%;
+                padding: 20px;
+            }
+            .audio-control {
+                bottom: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+            }
+            .falling-emoji {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="animation-container"></div>
+
+    <div class="meaning-text" id="meaning-text">
+        <p>A Kalanchoe simboliza endurance, perseverança e rejuvenescimento, representando a força interior para superar desafios e buscar equilíbrio espiritual.</p>
+        <p>Ela reflete amor eterno e afeto profundo, um lembrete da conexão duradoura e do cuidado mútuo.</p>
+        <p>Essas flores são apenas passageiras, mas o sentimento é eterno e evolui a cada dia <span class="emoji">🌱</span><span class="heart">❤</span><span class="emoji">✨</span></p>
+    </div>
+
+    <div class="personal-message" id="mom-message">
+        <p class="mom-message">Te amo, mamãe <span class="heart">❤</span></p>
+    </div>
+
+    <div class="personal-message" id="wife-message">
+        <p class="wife-message">Te amo, minha esposa <span class="heart">❤</span></p>
+    </div>
+
+    <div class="personal-message" id="final-message">
+        <p class="final-message">Vocês são mulheres extremamente fortes e capazes de criar tudo o que desejam <span class="heart">❤</span><span class="emoji">✨</span><span class="heart">❤</span></p>
+        <p class="fun-message">Lavarei a louça no domingo para que vocês fiquem à vontade e descansem <span class="emoji">😄</span><span class="heart">❤</span><span class="emoji">🌹</span></p>
+    </div>
+
+    <div class="audio-control" id="audio-control" title="Tocar/Pausar música">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+        </svg>
+    </div>
+
+    <audio id="background-music" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=acoustic-guitar-loop-95-bpm-135531.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const emojis = ['🌸', '💝', '✨', '🌺', '💖', '🌹', '💕', '⭐'];
+            const container = document.getElementById('animation-container');
+            const meaningText = document.getElementById('meaning-text');
+            const momMessage = document.getElementById('mom-message');
+            const wifeMessage = document.getElementById('wife-message');
+            const finalMessage = document.getElementById('final-message');
+            const audioControl = document.getElementById('audio-control');
+            const backgroundMusic = document.getElementById('background-music');
+
+            function createFallingEmoji() {
+                const emoji = document.createElement('div');
+                emoji.className = 'falling-emoji';
+                
+                const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.textContent = randomEmoji;
+                
+                const left = Math.floor(Math.random() * 100);
+                emoji.style.left = `${left}%`;
+                
+                const duration = Math.random() * 3 + 4;
+                emoji.style.animationDuration = `${duration}s`;
+                
+                container.appendChild(emoji);
+                
+                setTimeout(() => {
+                    emoji.remove();
+                }, duration * 1000);
+            }            function startEmojis() {
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => createFallingEmoji(), i * 300);
+                }
+                
+                setInterval(() => {
+                    if (document.querySelectorAll('.falling-emoji').length < 8) {
+                        createFallingEmoji();
+                    }
+                }, 1200);
+            }
+
+            // Iniciar emojis e animações
+            startEmojis();            // Sequência de mensagens
+            setTimeout(() => {
+                meaningText.style.opacity = '1';
+                
+                setTimeout(() => {
+                    meaningText.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        momMessage.style.opacity = '1';
+                        
+                        setTimeout(() => {
+                            momMessage.style.opacity = '0';
+                            
+                            setTimeout(() => {
+                                wifeMessage.style.opacity = '1';
+                                
+                                setTimeout(() => {
+                                    wifeMessage.style.opacity = '0';
+                                    
+                                    setTimeout(() => {
+                                        finalMessage.style.opacity = '1';
+                                    }, 2000);
+                                }, 6000);
+                            }, 2000);
+                        }, 6000);
+                    }, 2000);
+                }, 12000);
+            }, 1000);
+
+            // Controle de áudio
+            let isPlaying = false;
+            audioControl.addEventListener('click', function() {
+                if (isPlaying) {
+                    backgroundMusic.pause();
+                    audioControl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" /><path d="M15.54 8.46a5 5 0 0 1 0 7.07" /><path d="M19.07 4.93a10 10 0 0 1 0 14.14" /></svg>';
+                } else {
+                    backgroundMusic.play().catch(e => console.log('Clique para tocar a música'));
+                    audioControl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+                }
+                isPlaying = !isPlaying;
+            });
+        });
+    </script>
+</body>
+</html>
